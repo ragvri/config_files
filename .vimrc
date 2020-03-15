@@ -13,6 +13,8 @@ Plugin 'preservim/nerdtree'
 Plugin 'preservim/nerdcommenter'
 
 Plugin 'valloric/youcompleteme'
+" Note: youcomplete me requires you to compile it; go to
+" .vim/bundle/youcompleteme. then > python3 setup.py --all 
 Plugin 'scrooloose/syntastic' 
 Plugin 'morhetz/gruvbox'
 " Keep Plugin commands between vundle#begin/end.
