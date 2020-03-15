@@ -148,3 +148,10 @@ eval "$(thefuck --alias)"
 
 # ====================aliases
 alias raghav="cd /mnt/c/Users/ragha"
+# No more cd ../../../..
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias ......='cd ../../../../..'
+alias update_system='sudo apt-get update -y && sudo apt-get upgrade -y && sudo apt-get autoremove -y && sudo apt-get autoclean -y'
