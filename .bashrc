@@ -146,6 +146,20 @@ if [ -f '/mnt/c/Users/ragha/google_cloud/google-cloud-sdk/completion.bash.inc' ]
 
 eval "$(thefuck --alias)"
 
+# Show git branch name
+force_color_prompt=yes
+color_prompt=yes
+parse_git_branch() {
+	 git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+ }
+ if [ "$color_prompt" = yes ]; then
+	  PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[01;31m\]$(parse_git_branch)\[\033[00m\]\$ '
+  else
+	   PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w$(parse_git_branch)\$ '
+   fi
+   unset color_prompt force_color_prompt
+
+
 # ====================aliases
 alias raghav="cd /mnt/c/Users/ragha"
 # No more cd ../../../..
@@ -155,3 +169,10 @@ alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias ......='cd ../../../../..'
 alias update_system='sudo apt-get update -y && sudo apt-get upgrade -y && sudo apt-get autoremove -y && sudo apt-get autoclean -y'
+
+export JAVA_HOME="/usr/lib/jvm/java-1.11.0-openjdk-amd64"
+export JDK_HOME="/usr/lib/jvm/java-1.11.0-openjdk-amd64"
+export PATH=$JDK_HOME/bin:$PATH
+export PATH=$JAVA_HOME/bin:$PATH
+export CLASSPATH=$CLASSPATH:/usr/share/java/mysql.jar
+export CLASSPATH=$CLASSPATH:/usr/share/tomcat8/lib/servlet-api.jar

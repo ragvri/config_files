@@ -15,8 +15,11 @@ Plugin 'preservim/nerdcommenter'
 Plugin 'valloric/youcompleteme'
 " Note: youcomplete me requires you to compile it; go to
 " .vim/bundle/youcompleteme. then > python3 setup.py --all 
-Plugin 'scrooloose/syntastic' 
+Plugin 'scrooloose/syntastic'
+" folding a code in pyhton
+Plugin 'tmhedberg/SimpylFold'
 Plugin 'morhetz/gruvbox'
+" zc to close a fold and zo to open a fold
 " Keep Plugin commands between vundle#begin/end.
 
 " All of your Plugins must be added before the following line
@@ -55,5 +58,6 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
 " color scheme
-" colorscheme gruvbox
+colorscheme gruvbox   
