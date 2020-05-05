@@ -48,6 +48,14 @@ let g:NERDCommentEmptyLines = 1
 set number
 set background=dark
 " :color desert
+" width of the tab is set to 4
+set tabstop=4 
+" Indents will have a width of 4
+set shiftwidth=4
+"  Sets the number of colums for a tab
+set softtabstop=4
+" Expand Tab to spaces
+set expandtab
 
 " ========syntastic settings 
 set statusline+=%#warningmsg#
