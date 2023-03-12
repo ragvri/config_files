@@ -39,6 +39,18 @@ fext() {
 			  find . -maxdepth "${2}" -iname "*${1}*"
 			    fi
 			    }
+                
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+
+branches() {
+    git for-each-ref --sort=-committerdate refs/heads/ --format='%(refname:short)'
+}
+
+# git status alias to only show the modified files.
+alias gssv='git status -uno'
+
 
 # use thefuck: https://github.com/nvbn/thefuck
 
