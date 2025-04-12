@@ -122,57 +122,11 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/ragvri/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/ragvri/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/ragvri/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/ragvri/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
+cd "$PWD"
 
+source ~/.aliases
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/mnt/c/Users/ragha/google_cloud/google-cloud-sdk/path.bash.inc' ]; then . '/mnt/c/Users/ragha/google_cloud/google-cloud-sdk/path.bash.inc'; fi
+# change shell to zsh
+zsh
 
-# The next line enables shell command completion for gcloud.
-if [ -f '/mnt/c/Users/ragha/google_cloud/google-cloud-sdk/completion.bash.inc' ]; then . '/mnt/c/Users/ragha/google_cloud/google-cloud-sdk/completion.bash.inc'; fi
-
-eval "$(thefuck --alias)"
-
-# Show git branch name
-force_color_prompt=yes
-color_prompt=yes
-parse_git_branch() {
-	 git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
- }
- if [ "$color_prompt" = yes ]; then
-	  PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[01;31m\]$(parse_git_branch)\[\033[00m\]\$ '
-  else
-	   PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w$(parse_git_branch)\$ '
-   fi
-   unset color_prompt force_color_prompt
-
-
-# ====================aliases
-alias raghav="cd /mnt/c/Users/ragha"
-# No more cd ../../../..
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias .....='cd ../../../..'
-alias ......='cd ../../../../..'
-alias update_system='sudo apt-get update -y && sudo apt-get upgrade -y && sudo apt-get autoremove -y && sudo apt-get autoclean -y'
-
-export JAVA_HOME="/usr/lib/jvm/java-1.11.0-openjdk-amd64"
-export JDK_HOME="/usr/lib/jvm/java-1.11.0-openjdk-amd64"
-export PATH=$JDK_HOME/bin:$PATH
-export PATH=$JAVA_HOME/bin:$PATH
-export CLASSPATH=$CLASSPATH:/usr/share/java/mysql.jar
-export CLASSPATH=$CLASSPATH:/usr/share/tomcat8/lib/servlet-api.jar
+alias config='/usr/bin/git --git-dir=/home/rjindal/.cfg/ --work-tree=/home/rjindal'

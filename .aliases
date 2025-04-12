@@ -1,56 +1,49 @@
-# Easy way to extract archives
-extract () {
-   if [ -f $1 ] ; then
-       case $1 in
-           *.tar.bz2)   tar xvjf $1;;
-           *.tar.gz)    tar xvzf $1;;
-           *.bz2)       bunzip2 $1 ;;
-           *.rar)       unrar x $1 ;;
-           *.gz)        gunzip $1  ;;
-           *.tar)       tar xvf $1 ;;
-           *.tbz2)      tar xvjf $1;;
-           *.tgz)       tar xvzf $1;;
-           *.zip)       unzip $1   ;;
-           *.Z)         uncompress $1  ;;
-           *.7z)        7z x $1;;
-           *) echo "don't know how to extract '$1'..." ;;
-       esac
-   else
-       echo "'$1' is not a valid file!"
-   fi
-}
+alias la='ls -A'
+alias zshconfig='vim ~/.zshrc'
+alias vimconfig='vim ~/.vimrc'
+alias tmuxconfig='vim ~/.tmux.conf'
+alias aliases='vim ~/.aliases'
+alias optimus='cd ~/code/optimus'
+alias gssv='gss | grep -v '\''^??'\'
 
-# Find files with extension
-# Usage: fext <ext> [max_depth]
-fext() {
-  if [ -z "${2}" ]; then
-      find . -type f -name "*.${1}"
-	else
-	    find . -maxdepth "${2}" -type f -name "*.${1}"
-	      fi
-	      }
-
-	      # Find file/directory by substring
-	      # Usage: fn <substring> [max_depth]
-	      fn() {
-		if [ -z "${2}" ]; then
-		    find . -iname "*${1}*"
-		      else
-			  find . -maxdepth "${2}" -iname "*${1}*"
-			    fi
-			    }
-                
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
+alias .....="cd ../../../.."
+
 
 branches() {
-    git for-each-ref --sort=-committerdate refs/heads/ --format='%(refname:short)'
+    git for-each-ref --sort=-committerdate refs/heads/ | awk -F '/' '{ print $3 }' | less
 }
 
-# git status alias to only show the modified files.
-alias gssv='git status -uno'
 
+update() {
+    # Fetch the latest changes from the remote repository
+    git fetch origin
 
-# use thefuck: https://github.com/nvbn/thefuck
+    # Attempt to rebase against the master branch
+    git rebase origin/master
 
+    # Check if the rebase was successful
+    if [ $? -eq 0 ]
+    then
+        echo "Rebase successful!"
+    else
+        # Abort the rebase
+        git rebase --abort
+
+        # Perform a merge with --squash
+        git merge --squash origin/master
+
+        echo "Rebase failed. Merge with --squash performed."
+    fi
+}
+
+function git_main_branch() {
+  def=`git remote show origin | sed -n '/HEAD branch/s/.*: //p'`
+  echo $def
+}
+
+alias gs="git for-each-ref --sort=-committerdate refs/heads --format='%(refname:short)' | fzf --preview 'git show --color=always {}' | xargs -r git switch"  
+
+alias config='/usr/bin/git --git-dir=/home/rjindal/.cfg/ --work-tree=/home/rjindal'
